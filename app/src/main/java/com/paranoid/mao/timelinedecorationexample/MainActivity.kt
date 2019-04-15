@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val layoutManager = LinearLayoutManager(this)
         val adapter = MyAdapter(dummyItems)
+        val timelineDecoration = TimelineDecoration()
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(timelineDecoration)
     }
 }
