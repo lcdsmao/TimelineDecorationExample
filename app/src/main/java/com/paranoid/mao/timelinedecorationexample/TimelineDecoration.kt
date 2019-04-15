@@ -7,13 +7,18 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class TimelineDecoration : RecyclerView.ItemDecoration() {
+class TimelineDecoration(
+        private val items: List<Item>
+) : RecyclerView.ItemDecoration() {
 
     private val paint = Paint()
-    private val leftInterval = 200
-    private val topInterval = 50
+    private val leftInterval = 500
+    private val topInterval = 100
     private val circleRadius = 20f
     private val lineHalfWidth = 5f
+    private val textMarginStart = 50f
+    private val textIntervalTop = 50f
+    private val textSize = 48f
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
@@ -54,6 +59,13 @@ class TimelineDecoration : RecyclerView.ItemDecoration() {
 
             paint.color = ContextCompat.getColor(context, R.color.colorMarker)
             c.drawCircle(centerX.toFloat(), centerY.toFloat(), circleRadius, paint)
+
+            val x = child.left - leftInterval - layoutParams.marginStart + textMarginStart
+            val y = centerY - textIntervalTop
+            val text = items[childAdapterPosition].time
+            paint.color = ContextCompat.getColor(context, R.color.colorText)
+            paint.textSize = textSize
+            c.drawText(text, x, y, paint)
         }
     }
 }

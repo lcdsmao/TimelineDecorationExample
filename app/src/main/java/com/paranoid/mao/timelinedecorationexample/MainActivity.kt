@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity() {
 
     private val dummyItems = List(31) {
-        Item("2019/1/$it", "Content $it\nContent $it")
+        Item("2019/1/${it + 1}", "Content $it\nContent $it")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val layoutManager = LinearLayoutManager(this)
         val adapter = MyAdapter(dummyItems)
-        val timelineDecoration = TimelineDecoration()
+        val timelineDecoration = TimelineDecoration(dummyItems)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(timelineDecoration)
